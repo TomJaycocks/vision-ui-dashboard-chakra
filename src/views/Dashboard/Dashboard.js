@@ -23,6 +23,11 @@ import {
 	CircularProgressLabel,
 	Flex,
 	Grid,
+	FormControl,
+	Input,
+	DarkMode,
+	Switch,
+	FormLabel,
 	Icon,
 	Progress,
 	SimpleGrid,
@@ -41,6 +46,11 @@ import {
 } from '@chakra-ui/react';
 // Styles for the circular progressbar
 import medusa from 'assets/img/cardimgfree.png';
+import GradientBorder from "components/GradientBorder/GradientBorder";
+//Form
+// import HookForm from 'variables/scraper';
+
+
 // Custom components
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
@@ -66,8 +76,20 @@ import {
 } from 'variables/charts';
 import { dashboardTableData, timelineData } from 'variables/general';
 
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient("https://gmrhlogdgjmlphtjxduk.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdtcmhsb2dkZ2ptbHBodGp4ZHVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0MzY2NTYsImV4cCI6MjAyOTAxMjY1Nn0.-FgBaGmU2oVSeBJKAq2g3vmY7-_ertXO5Yp8XZbszBA");
+
+const { data, error } = await supabase.auth.getSession()
+// const { data: { user } } = await supabase.auth.getUser()
+
+const {	data: { user } } = await supabase.auth.getUser();
+//   let metadata = user.user_metadata;
+
+
 export default function Dashboard() {
 	return (
+		
 		<Flex flexDirection='column' pt={{ base: '120px', md: '75px' }}>
 			<SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing='24px'>
 				{/* MiniStatistics Card */}
@@ -76,13 +98,13 @@ export default function Dashboard() {
 						<Flex flexDirection='row' align='center' justify='center' w='100%'>
 							<Stat me='auto'>
 								<StatLabel fontSize='sm' color='gray.400' fontWeight='bold' pb='2px'>
-									Today's Money
+									Page Index Tool
 								</StatLabel>
 								<Flex>
 									<StatNumber fontSize='lg' color='#fff'>
-										$53,000
+										Google Crawl Bot
 									</StatNumber>
-									<StatHelpText
+									{/* <StatHelpText
 										alignSelf='flex-end'
 										justifySelf='flex-end'
 										m='0px'
@@ -91,11 +113,11 @@ export default function Dashboard() {
 										ps='3px'
 										fontSize='md'>
 										+55%
-									</StatHelpText>
+									</StatHelpText> */}
 								</Flex>
 							</Stat>
 							<IconBox as='box' h={'45px'} w={'45px'} bg='brand.200'>
-								<WalletIcon h={'24px'} w={'24px'} color='#fff' />
+								<StatsIcon h={'24px'} w={'24px'} color='#fff' />
 							</IconBox>
 						</Flex>
 					</CardBody>
@@ -106,13 +128,13 @@ export default function Dashboard() {
 						<Flex flexDirection='row' align='center' justify='center' w='100%'>
 							<Stat me='auto'>
 								<StatLabel fontSize='sm' color='gray.400' fontWeight='bold' pb='2px'>
-									Today's Users
+									Page Scraper Tool
 								</StatLabel>
 								<Flex>
 									<StatNumber fontSize='lg' color='#fff'>
-										2,300
+										Web Scraper
 									</StatNumber>
-									<StatHelpText
+									{/* <StatHelpText
 										alignSelf='flex-end'
 										justifySelf='flex-end'
 										m='0px'
@@ -121,7 +143,7 @@ export default function Dashboard() {
 										ps='3px'
 										fontSize='md'>
 										+5%
-									</StatHelpText>
+									</StatHelpText> */}
 								</Flex>
 							</Stat>
 							<IconBox as='box' h={'45px'} w={'45px'} bg='brand.200'>
@@ -207,11 +229,12 @@ export default function Dashboard() {
 									Welcome back,
 								</Text>
 								<Text fontSize='28px' color='#fff' fontWeight='bold' mb='18px'>
-									Mark Johnson
+								
+								{metadata.dname}
+
 								</Text>
 								<Text fontSize='md' color='gray.400' fontWeight='normal' mb='auto'>
-									Glad to see you again! <br />
-									Ask me anything.
+									Glad to see you again!
 								</Text>
 								<Spacer />
 								<Flex align='center'>
@@ -249,7 +272,7 @@ export default function Dashboard() {
 					</CardBody>
 				</Card>
 				{/* Satisfaction Rate */}
-				<Card gridArea={{ md: '2 / 1 / 3 / 2', '2xl': 'auto' }}>
+				{/* <Card gridArea={{ md: '2 / 1 / 3 / 2', '2xl': 'auto' }}>
 					<CardHeader mb='24px'>
 						<Flex direction='column'>
 							<Text color='#fff' fontSize='lg' fontWeight='bold' mb='4px'>
@@ -303,9 +326,9 @@ export default function Dashboard() {
 							</Text>
 						</Stack>
 					</Flex>
-				</Card>
+				</Card> */}
 				{/* Referral Tracking */}
-				<Card gridArea={{ md: '2 / 2 / 3 / 3', '2xl': 'auto' }}>
+				{/* <Card gridArea={{ md: '2 / 2 / 3 / 3', '2xl': 'auto' }}>
 					<Flex direction='column'>
 						<Flex justify='space-between' align='center' mb='40px'>
 							<Text color='#fff' fontSize='lg' fontWeight='bold'>
@@ -375,8 +398,10 @@ export default function Dashboard() {
 							</Box>
 						</Flex>
 					</Flex>
-				</Card>
+				</Card> */}
 			</Grid>
+			{/* Pages Built Section */}
+			
 			<Grid
 				templateColumns={{ sm: '1fr', lg: '1.7fr 1.3fr' }}
 				maxW={{ sm: '100%', md: '100%' }}
@@ -387,14 +412,14 @@ export default function Dashboard() {
 					<CardHeader mb='20px' ps='22px'>
 						<Flex direction='column' alignSelf='flex-start'>
 							<Text fontSize='lg' color='#fff' fontWeight='bold' mb='6px'>
-								Sales Overview
+								Pages Built:
 							</Text>
-							<Text fontSize='md' fontWeight='medium' color='gray.400'>
+							{/* <Text fontSize='md' fontWeight='medium' color='gray.400'>
 								<Text as='span' color='green.400' fontWeight='bold'>
 									(+5%) more
 								</Text>{' '}
 								in 2021
-							</Text>
+							</Text> */}
 						</Flex>
 					</CardHeader>
 					<Box w='100%' minH={{ sm: '300px' }}>
@@ -405,132 +430,34 @@ export default function Dashboard() {
 					</Box>
 				</Card>
 				{/* Active Users */}
-				<Card p='16px'>
-					<CardBody>
-						<Flex direction='column' w='100%'>
-							<Box
-								bg='linear-gradient(126.97deg, #060C29 28.26%, rgba(4, 12, 48, 0.5) 91.2%)'
-								borderRadius='20px'
-								display={{ sm: 'flex', md: 'block' }}
-								justify={{ sm: 'center', md: 'flex-start' }}
-								align={{ sm: 'center', md: 'flex-start' }}
-								minH={{ sm: '180px', md: '220px' }}
-								p={{ sm: '0px', md: '22px' }}>
-								<BarChart
-									barChartOptions={barChartOptionsDashboard}
-									barChartData={barChartDataDashboard}
-								/>
-							</Box>
-							<Flex direction='column' mt='24px' mb='36px' alignSelf='flex-start'>
-								<Text fontSize='lg' color='#fff' fontWeight='bold' mb='6px'>
-									Active Users
-								</Text>
-								<Text fontSize='md' fontWeight='medium' color='gray.400'>
-									<Text as='span' color='green.400' fontWeight='bold'>
-										(+23%)
-									</Text>{' '}
-									than last week
-								</Text>
-							</Flex>
-							<SimpleGrid gap={{ sm: '12px' }} columns={4}>
-								<Flex direction='column'>
-									<Flex alignItems='center'>
-										<IconBox as='box' h={'30px'} w={'30px'} bg='brand.200' me='6px'>
-											<WalletIcon h={'15px'} w={'15px'} color='#fff' />
-										</IconBox>
-										<Text fontSize='sm' color='gray.400'>
-											Users
-										</Text>
-									</Flex>
-									<Text
-										fontSize={{ sm: 'md', lg: 'lg' }}
-										color='#fff'
-										fontWeight='bold'
-										mb='6px'
-										my='6px'>
-										32,984
-									</Text>
-									<Progress colorScheme='brand' bg='#2D2E5F' borderRadius='30px' h='5px' value={20} />
-								</Flex>
-								<Flex direction='column'>
-									<Flex alignItems='center'>
-										<IconBox as='box' h={'30px'} w={'30px'} bg='brand.200' me='6px'>
-											<RocketIcon h={'15px'} w={'15px'} color='#fff' />
-										</IconBox>
-										<Text fontSize='sm' color='gray.400'>
-											Clicks
-										</Text>
-									</Flex>
-									<Text
-										fontSize={{ sm: 'md', lg: 'lg' }}
-										color='#fff'
-										fontWeight='bold'
-										mb='6px'
-										my='6px'>
-										2.42m
-									</Text>
-									<Progress colorScheme='brand' bg='#2D2E5F' borderRadius='30px' h='5px' value={90} />
-								</Flex>
-								<Flex direction='column'>
-									<Flex alignItems='center'>
-										<IconBox as='box' h={'30px'} w={'30px'} bg='brand.200' me='6px'>
-											<CartIcon h={'15px'} w={'15px'} color='#fff' />
-										</IconBox>
-										<Text fontSize='sm' color='gray.400'>
-											Sales
-										</Text>
-									</Flex>
-									<Text
-										fontSize={{ sm: 'md', lg: 'lg' }}
-										color='#fff'
-										fontWeight='bold'
-										mb='6px'
-										my='6px'>
-										2,400$
-									</Text>
-									<Progress colorScheme='brand' bg='#2D2E5F' borderRadius='30px' h='5px' value={30} />
-								</Flex>
-								<Flex direction='column'>
-									<Flex alignItems='center'>
-										<IconBox as='box' h={'30px'} w={'30px'} bg='brand.200' me='6px'>
-											<StatsIcon h={'15px'} w={'15px'} color='#fff' />
-										</IconBox>
-										<Text fontSize='sm' color='gray.400'>
-											Items
-										</Text>
-									</Flex>
-									<Text
-										fontSize={{ sm: 'md', lg: 'lg' }}
-										color='#fff'
-										fontWeight='bold'
-										mb='6px'
-										my='6px'>
-										320
-									</Text>
-									<Progress colorScheme='brand' bg='#2D2E5F' borderRadius='30px' h='5px' value={50} />
-								</Flex>
-							</SimpleGrid>
+				<Card p='28px 0px 0px 0px'>
+					<CardHeader mb='20px' ps='22px'>
+						<Flex direction='column' alignSelf='flex-start'>
+							<Text fontSize='lg' color='#fff' fontWeight='bold' mb='6px'>
+								Scraper:
+							</Text>
+							<br></br>
+
+							{/* <HookForm /> */}
+							
+							{/* <Text fontSize='md' fontWeight='medium' color='gray.400'>
+								<Text as='span' color='green.400' fontWeight='bold'>
+									(+5%) more
+								</Text>{' '}
+								in 2021
+							</Text> */}
 						</Flex>
-					</CardBody>
+					</CardHeader>
 				</Card>
 			</Grid>
+			{/* Projects */}
 			<Grid templateColumns={{ sm: '1fr', md: '1fr 1fr', lg: '2fr 1fr' }} gap='24px'>
-				{/* Projects */}
 				<Card p='16px' overflowX={{ sm: 'scroll', xl: 'hidden' }}>
 					<CardHeader p='12px 0px 28px 0px'>
 						<Flex direction='column'>
 							<Text fontSize='lg' color='#fff' fontWeight='bold' pb='8px'>
-								Projects
+								Clients:
 							</Text>
-							<Flex align='center'>
-								<Icon as={IoCheckmarkDoneCircleSharp} color='teal.300' w={4} h={4} pe='3px' />
-								<Text fontSize='sm' color='gray.400' fontWeight='normal'>
-									<Text fontWeight='bold' as='span'>
-										30 done
-									</Text>{' '}
-									this month.
-								</Text>
-							</Flex>
 						</Flex>
 					</CardHeader>
 					<Table variant='simple' color='#fff'>
@@ -544,25 +471,25 @@ export default function Dashboard() {
 									Companies
 								</Th>
 								<Th color='gray.400' fontFamily='Plus Jakarta Display' borderBottomColor='#56577A'>
-									Members
+									Retainer
 								</Th>
 								<Th color='gray.400' fontFamily='Plus Jakarta Display' borderBottomColor='#56577A'>
-									Budget
+									Pages Built
 								</Th>
-								<Th color='gray.400' fontFamily='Plus Jakarta Display' borderBottomColor='#56577A'>
+								{/* <Th color='gray.400' fontFamily='Plus Jakarta Display' borderBottomColor='#56577A'>
 									Completion
-								</Th>
+								</Th> */}
 							</Tr>
 						</Thead>
 						<Tbody>
 							{dashboardTableData.map((row, index, arr) => {
 								return (
 									<DashboardTableRow
-										name={row.name}
 										logo={row.logo}
-										members={row.members}
+										name={row.name}
 										budget={row.budget}
-										progression={row.progression}
+										pages={row.pages}
+										// progression={row.progression}
 										lastItem={index === arr.length - 1 ? true : false}
 									/>
 								);

@@ -43,6 +43,9 @@ import GradientBorder from "components/GradientBorder/GradientBorder";
 // Assets
 import signUpImage from "assets/img/signUpImage.png";
 
+import HookForm from 'variables/signup';
+
+
 function SignUp() {
   const titleColor = "white";
   const textColor = "gray.400";
@@ -111,74 +114,7 @@ function SignUp() {
                 mb='22px'>
                 Register With
               </Text>
-              <HStack spacing='15px' justify='center' mb='22px'>
-                <GradientBorder borderRadius='15px'>
-                  <Flex
-                    _hover={{ filter: "brightness(120%)" }}
-                    transition='all .25s ease'
-                    cursor='pointer'
-                    justify='center'
-                    align='center'
-                    bg='rgb(19,21,54)'
-                    w='71px'
-                    h='71px'
-                    borderRadius='15px'>
-                    <Link href='#'>
-                      <Icon
-                        color={titleColor}
-                        as={FaFacebook}
-                        w='30px'
-                        h='30px'
-                        _hover={{ filter: "brightness(120%)" }}
-                      />
-                    </Link>
-                  </Flex>
-                </GradientBorder>
-                <GradientBorder borderRadius='15px'>
-                  <Flex
-                    _hover={{ filter: "brightness(120%)" }}
-                    transition='all .25s ease'
-                    cursor='pointer'
-                    justify='center'
-                    align='center'
-                    bg='rgb(19,21,54)'
-                    w='71px'
-                    h='71px'
-                    borderRadius='15px'>
-                    <Link href='#'>
-                      <Icon
-                        color={titleColor}
-                        as={FaApple}
-                        w='30px'
-                        h='30px'
-                        _hover={{ filter: "brightness(120%)" }}
-                      />
-                    </Link>
-                  </Flex>
-                </GradientBorder>
-                <GradientBorder borderRadius='15px'>
-                  <Flex
-                    _hover={{ filter: "brightness(120%)" }}
-                    transition='all .25s ease'
-                    cursor='pointer'
-                    justify='center'
-                    align='center'
-                    bg='rgb(19,21,54)'
-                    w='71px'
-                    h='71px'
-                    borderRadius='15px'>
-                    <Link href='#'>
-                      <Icon
-                        color={titleColor}
-                        as={FaGoogle}
-                        w='30px'
-                        h='30px'
-                        _hover={{ filter: "brightness(120%)" }}
-                      />
-                    </Link>
-                  </Flex>
-                </GradientBorder>
-              </HStack>
+              
               <Text
                 fontSize='lg'
                 color='gray.400'
@@ -187,7 +123,10 @@ function SignUp() {
                 mb='22px'>
                 or
               </Text>
-              <FormControl>
+              
+              <HookForm />
+
+              {/* <FormControl>
                 <FormLabel
                   color={titleColor}
                   ms='4px'
@@ -297,7 +236,9 @@ function SignUp() {
                   mt='20px'>
                   SIGN UP
                 </Button>
-              </FormControl>
+              </FormControl> */}
+              
+              
               <Flex
                 flexDirection='column'
                 justifyContent='center'
