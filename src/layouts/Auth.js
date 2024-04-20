@@ -1,3 +1,4 @@
+import { supabase } from 'lib/helper/supabaseClient';
 // chakra imports
 import { Box, ChakraProvider, Portal } from "@chakra-ui/react";
 import Footer from "components/Footer/Footer.js";
@@ -7,6 +8,8 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
 import theme from "theme/themeAuth.js";
+
+
 
 /*!
 
@@ -27,6 +30,9 @@ import theme from "theme/themeAuth.js";
 */
 
 export default function Pages(props) {
+
+  
+
   const { ...rest } = props;
   // ref for the wrapper div
   const wrapper = React.createRef();

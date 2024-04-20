@@ -30,7 +30,7 @@ import {
 import React from "react";
 
 function DashboardTableRow(props) {
-  const { logo, name, members, budget, progression, lastItem } = props;
+  const { logo, name, budget, pages, progression, lastItem } = props;
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Tr>
@@ -46,8 +46,17 @@ function DashboardTableRow(props) {
           </Text>
         </Flex>
       </Td>
-
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+        <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>
+          £{budget}
+        </Text>
+      </Td>
+      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+        <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>
+          {pages}
+        </Text>
+      </Td>
+      {/* <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
         <AvatarGroup size='xs' showBorder={false}>
           {members.map((member) => {
             return (
@@ -61,13 +70,9 @@ function DashboardTableRow(props) {
             );
           })}
         </AvatarGroup>
-      </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>
-          {budget}
-        </Text>
-      </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+      </Td> */}
+      
+      {/* <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
         <Flex direction='column'>
           <Text
             fontSize='sm'
@@ -82,7 +87,7 @@ function DashboardTableRow(props) {
             borderRadius='30px'
           />
         </Flex>
-      </Td>
+      </Td> */}
     </Tr>
   );
 }
