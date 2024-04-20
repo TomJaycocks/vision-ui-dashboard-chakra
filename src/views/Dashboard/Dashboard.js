@@ -230,7 +230,7 @@ export default function Dashboard() {
 								</Text>
 								<Text fontSize='28px' color='#fff' fontWeight='bold' mb='18px'>
 								
-								{metadata.dname}
+								{/* {metadata.dname} */}
 
 								</Text>
 								<Text fontSize='md' color='gray.400' fontWeight='normal' mb='auto'>

@@ -15,7 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ChakraLink, LinkProps } from '@chakra-ui/react'
 import React from "react";
 
 // Chakra imports
@@ -51,12 +52,13 @@ function SignUp() {
   const textColor = "gray.400";
 
   return (
-    <Flex position='relative' overflow={{ lg: "hidden" }}>
+    <Flex position='relative' >
       <Flex
         flexDirection='column'
         h={{ sm: "initial", md: "unset" }}
         w={{ base: "90%" }}
         maxW='1044px'
+        minH='100vh'
         mx='auto'
         justifyContent='space-between'
         pt={{ sm: "100px", md: "0px" }}
@@ -74,24 +76,24 @@ function SignUp() {
             direction='column'
             textAlign='center'
             justifyContent='center'
-            align='center'
+            align='start'
             mt={{ base: "60px", md: "140px", lg: "200px" }}
-            mb='50px'>
+            mb='30px'>
             <Text
               fontSize='4xl'
               lineHeight='39px'
-              color='white'
+              color={titleColor}
               fontWeight='bold'>
               Welcome!
             </Text>
             <Text
               fontSize='md'
-              color='white'
+              color={textColor}
               fontWeight='normal'
               mt='10px'
+              align='start'
               w={{ base: "100%", md: "90%", lg: "90%", xl: "80%" }}>
-              Use these awesome forms to login or create new account in your
-              project for free.
+              Use these awesome forms to login or create new account in the Apollo dashboard.
             </Text>
           </Flex>
           <GradientBorder p='2px' me={{ base: "none", lg: "30px", xl: "none" }}>
@@ -106,138 +108,8 @@ function SignUp() {
               bg={{
                 base: "rgb(19,21,56)",
               }}>
-              <Text
-                fontSize='xl'
-                color={textColor}
-                fontWeight='bold'
-                textAlign='center'
-                mb='22px'>
-                Register With
-              </Text>
-              
-              <Text
-                fontSize='lg'
-                color='gray.400'
-                fontWeight='bold'
-                textAlign='center'
-                mb='22px'>
-                or
-              </Text>
               
               <HookForm />
-
-              {/* <FormControl>
-                <FormLabel
-                  color={titleColor}
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='normal'>
-                  Name
-                </FormLabel>
-
-                <GradientBorder
-                  mb='24px'
-                  h='50px'
-                  w={{ base: "100%", lg: "fit-content" }}
-                  borderRadius='20px'>
-                  <Input
-                    color={titleColor}
-                    bg={{
-                      base: "rgb(19,21,54)",
-                    }}
-                    border='transparent'
-                    borderRadius='20px'
-                    fontSize='sm'
-                    size='lg'
-                    w={{ base: "100%", md: "346px" }}
-                    maxW='100%'
-                    h='46px'
-                    type='text'
-                    placeholder='Your name'
-                  />
-                </GradientBorder>
-                <FormLabel
-                  color={titleColor}
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='normal'>
-                  Email
-                </FormLabel>
-                <GradientBorder
-                  mb='24px'
-                  h='50px'
-                  w={{ base: "100%", lg: "fit-content" }}
-                  borderRadius='20px'>
-                  <Input
-                    color={titleColor}
-                    bg={{
-                      base: "rgb(19,21,54)",
-                    }}
-                    border='transparent'
-                    borderRadius='20px'
-                    fontSize='sm'
-                    size='lg'
-                    w={{ base: "100%", md: "346px" }}
-                    maxW='100%'
-                    h='46px'
-                    type='email'
-                    placeholder='Your email address'
-                  />
-                </GradientBorder>
-                <FormLabel
-                  color={titleColor}
-                  ms='4px'
-                  fontSize='sm'
-                  fontWeight='normal'>
-                  Password
-                </FormLabel>
-                <GradientBorder
-                  mb='24px'
-                  h='50px'
-                  w={{ base: "100%", lg: "fit-content" }}
-                  borderRadius='20px'>
-                  <Input
-                    color={titleColor}
-                    bg={{
-                      base: "rgb(19,21,54)",
-                    }}
-                    border='transparent'
-                    borderRadius='20px'
-                    fontSize='sm'
-                    size='lg'
-                    w={{ base: "100%", md: "346px" }}
-                    maxW='100%'
-                    h='46px'
-                    type='password'
-                    placeholder='Your password'
-                  />
-                </GradientBorder>
-                <FormControl display='flex' alignItems='center' mb='24px'>
-                  <DarkMode>
-                    <Switch id='remember-login' colorScheme='brand' me='10px' />
-                  </DarkMode>
-
-                  <FormLabel
-                    color={titleColor}
-                    htmlFor='remember-login'
-                    mb='0'
-                    fontWeight='normal'>
-                    Remember me
-                  </FormLabel>
-                </FormControl>
-                <Button
-                  variant='brand'
-                  fontSize='10px'
-                  type='submit'
-                  w='100%'
-                  maxW='350px'
-                  h='45'
-                  mb='20px'
-                  mt='20px'>
-                  SIGN UP
-                </Button>
-              </FormControl> */}
-              
               
               <Flex
                 flexDirection='column'
@@ -246,15 +118,7 @@ function SignUp() {
                 maxW='100%'
                 mt='0px'>
                 <Text color={textColor} fontWeight='medium'>
-                  Already have an account?
-                  <Link
-                    color={titleColor}
-                    as='span'
-                    ms='5px'
-                    href='#'
-                    fontWeight='bold'>
-                    Sign In
-                  </Link>
+                  Already have an account? <ChakraLink color={titleColor} as={ReactRouterLink} to='/auth/SignIn'> Sign in</ChakraLink>
                 </Text>
               </Flex>
             </Flex>
@@ -264,21 +128,22 @@ function SignUp() {
           w={{ base: "335px", md: "450px" }}
           mx={{ base: "auto", lg: "unset" }}
           ms={{ base: "auto", lg: "auto" }}
-          mb='90px'>
+          mb='80px'>
           <AuthFooter />
         </Box>
         <Box
           display={{ base: "none", lg: "block" }}
           overflowX='hidden'
-          h='1300px'
-          maxW={{ md: "50vw", lg: "48vw" }}
+          h='100%'
+          maxW={{ md: "50vw", lg: "50vw" }}
+          minH='100vh'
           w='960px'
           position='absolute'
           left='0px'>
           <Box
             bgImage={signUpImage}
             w='100%'
-            h='1300px'
+            h='100%'
             bgSize='cover'
             bgPosition='50%'
             position='absolute'
@@ -303,7 +168,7 @@ function SignUp() {
               fontWeight='bold'
               bgClip='text !important'
               bg='linear-gradient(94.56deg, #FFFFFF 79.99%, #21242F 102.65%)'>
-              THE VISION UI DASHBOARD
+              THE APOLLO DASHBOARD
             </Text>
           </Box>
         </Box>

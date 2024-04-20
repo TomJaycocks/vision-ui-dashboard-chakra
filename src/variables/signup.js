@@ -1,3 +1,4 @@
+import { supabase } from 'lib/helper/supabaseClient';
 import GradientBorder from "components/GradientBorder/GradientBorder";
 import { useForm } from 'react-hook-form';
 import { BsArrowRight } from 'react-icons/bs';
@@ -10,13 +11,6 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react';
-
-
-import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient("https://gmrhlogdgjmlphtjxduk.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdtcmhsb2dkZ2ptbHBodGp4ZHVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0MzY2NTYsImV4cCI6MjAyOTAxMjY1Nn0.-FgBaGmU2oVSeBJKAq2g3vmY7-_ertXO5Yp8XZbszBA");
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
 export default function HookForm() {
   const {
@@ -111,31 +105,13 @@ export default function HookForm() {
                 minLength: { value: 4, message: 'Minimum length should be 4' },
               })}
             />
-            <Input mb='24px'
-            w={{ base: "100%", lg: "fit-content" }}
-            borderRadius='20px'
-            color='white'
-            bg='rgb(19,21,54)'
-            border='transparent'
-            fontSize='sm'
-            size='lg'
-            maxW='100%'
-            h='46px'
-            name='web'
-            id='web'
-            placeholder='Enter web'
-            {...register('web', {
-                required: 'This is required',
-                minLength: { value: 4, message: 'Minimum length should be 4' },
-              })}
-            />
         
         <FormErrorMessage>
           {errors.name && errors.name.message}
         </FormErrorMessage>
       </FormControl>
 
-      <Button isLoading={isSubmitting} type='submit'
+      {/* <Button isLoading={isSubmitting} type='submit'
 										p='0px'
 										variant='no-hover'
 										bg='transparent'
@@ -162,10 +138,28 @@ export default function HookForm() {
 											pt='4px'
 											_hover={{ transform: 'translateX(20%)' }}
 										/>
-									</Button>
+									</Button> */}
+
+                  <Button isLoading={isSubmitting} type='submit'
+            variant='brand'
+            fontSize='10px'
+            type='submit'
+            w='100%'
+            maxW='350px'
+            h='45'
+            mb='20px'
+            mt='20px'>
+            SIGN UP
+        </Button>
     </form>
   )
 }
+
+// begin
+//   insert into public.profiles (id, username, display_name, email)
+//   values (new.id, new.raw_user_meta_data->>'uname', new.raw_user_meta_data->>'dname', new.raw_user_meta_data->>'email');
+//   return new;
+// end;
 
 
 
@@ -176,7 +170,6 @@ async function onsubmitScrape(values) {
   const userName = values.userName;
   const email = values.email;
   const pass = values.pass;
-  const web = values.web;
 
   let { data, error } = await supabase.auth.signUp({
     email: email,
@@ -185,7 +178,6 @@ async function onsubmitScrape(values) {
       data: {
         uname: userName,
         dname: displayName,
-        web: web
       }
     }
     
